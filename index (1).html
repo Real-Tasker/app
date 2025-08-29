@@ -1,0 +1,2684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Tasker</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+
+    <!-- Page Transition Overlay -->
+    <div id="pageTransitionOverlay" class="page-transition-overlay">
+        <div class="transition-spinner"></div>
+        <div class="transition-text">
+            Loading
+            <div class="transition-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="mainContainer" class="main-container">
+
+        <!-- Main XML Page -->
+        <div id="mainXmlPage" class="page active">
+            <div class="main-xml-container">
+                <div class="main-xml-content">
+                    <!-- Admin Logo Section (Hidden by default, will show when logo uploaded) -->
+                    <div class="admin-logo-section" id="adminLogoSection" style="display: none;">
+                        <img id="adminLogo" src="" alt="Admin Logo" class="admin-logo">
+                    </div>
+
+                    <!-- Default Logo Section (Visible when no admin logo) -->
+                    <div class="default-logo-section" id="defaultLogoSection" style="display: block;">
+                        <!-- Logo text removed -->
+                    </div>
+
+                    <div class="main-xml-loading">
+                        <p class="xml-loading-text">Loading your dashboard...</p>
+
+                        <!-- Premium Loading Animation -->
+                        <div class="xml-loading-animation">
+                            <div class="premium-loader">
+                                <div class="loader-ring"></div>
+                                <div class="loader-ring"></div>
+                                <div class="loader-ring"></div>
+                                <div class="loader-center"></div>
+                                <div class="loader-particles">
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login/Signup Page -->
+        <div id="authPage" class="page">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <!-- Admin Logo Section (Hidden by default) -->
+                    <div class="admin-logo-section" id="authAdminLogoSection" style="display: none;">
+                        <img id="authAdminLogo" src="" alt="Admin Logo" class="admin-logo">
+                    </div>
+
+                    <!-- Default Logo Section (Hidden when admin logo is available) -->
+                    <div class="default-logo-section" id="authDefaultLogoSection" style="display: none;">
+                        <h1 class="logo-text">Real <span class="logo-accent">Tasker</span></h1>
+                    </div>
+                    <p class="auth-subtitle">Create an account or log in to discover opportunities</p>
+                </div>
+
+                <div class="auth-form">
+                    <div class="input-group">
+                        <input type="email" id="authEmail" placeholder="Email (e.g., user@gmail.com)" class="auth-input">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+
+                    <div class="auth-error" id="authError" style="display: none;"></div>
+
+                    <button id="continueBtn" class="continue-btn">Continue</button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button id="googleBtn" class="social-btn google-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Continue with Google</span>
+                        </button>
+                    </div>
+
+                    <div class="auth-footer">
+                        <p>By signing in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pin Entry Page -->
+        <div id="pinPage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="pinPageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <button id="pinPageLogout" class="logout-btn-mini">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <!-- Admin Logo Section (Hidden by default) -->
+                    <div class="admin-logo-section" id="pinAdminLogoSection" style="display: none;">
+                        <img id="pinAdminLogo" src="" alt="Admin Logo" class="admin-logo">
+                    </div>
+
+                    <!-- Default Logo Section (Hidden when admin logo is available) -->
+                    <div class="default-logo-section" id="pinDefaultLogoSection" style="display: none;">
+                        <h2>Enter Your PIN</h2>
+                    </div>
+                    <p class="auth-subtitle">Please enter your 5-digit PIN</p>
+                </div>
+
+                <div class="pin-container">
+                    <div class="pin-inputs">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="0">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="1">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="2">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="3">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="4">
+                    </div>
+                    <div class="pin-error" id="pinError" style="display: none;">
+                        <p>Incorrect PIN. Please try again.</p>
+                    </div>
+                    <button id="pinSubmit" class="continue-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Flow Pages -->
+        <!-- Name Page -->
+        <div id="namePage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="namePageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <!-- Admin Logo Section (Hidden by default) -->
+                    <div class="admin-logo-section" id="nameAdminLogoSection" style="display: none;">
+                        <img id="nameAdminLogo" src="" alt="Admin Logo" class="admin-logo">
+                    </div>
+
+                    <!-- Default Logo Section (Hidden when admin logo is available) -->
+                    <div class="default-logo-section" id="nameDefaultLogoSection" style="display: none;">
+                        <h2>What's your name?</h2>
+                    </div>
+                    <p class="auth-subtitle">Please enter your full name</p>
+                </div>
+
+                <div class="auth-form">
+                    <div class="input-group">
+                        <input type="text" id="signupName" placeholder="Full Name" class="auth-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    <div class="auth-error" id="nameError" style="display: none;"></div>
+                    <button id="nameConfirm" class="continue-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Username Page -->
+        <div id="usernamePage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="usernamePageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>Choose a username</h2>
+                    <p class="auth-subtitle">This will be your unique identifier</p>
+                </div>
+
+                <div class="auth-form">
+                    <div class="input-group username-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <div class="username-display">
+                            <span class="username-prefix">realtasker.com/@</span>
+                            <input type="text" id="signupUsername" placeholder="username" class="username-input">
+                        </div>
+                    </div>
+                    <div class="username-hint">
+                        <p><i class="fas fa-info-circle"></i> Suggested from your email. You can change it if you want.</p>
+                    </div>
+                    <div class="username-error" id="usernameError" style="display: none;"></div>
+                    <button id="usernameConfirm" class="continue-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date of Birth Page -->
+        <div id="dobPage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="dobPageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>What is your birthday?</h2>
+                    <p class="auth-subtitle">In order to give you the best experience on Real Tasker, please enter your birthday.</p>
+                </div>
+
+                <div class="auth-form">
+                    <div class="dob-container">
+                        <div class="dob-dropdowns">
+                            <select id="dobMonth" class="dob-select">
+                                <option value="">Month</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+
+                            <select id="dobDay" class="dob-select">
+                                <option value="">Day</option>
+                            </select>
+
+                            <select id="dobYear" class="dob-select">
+                                <option value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="auth-error" id="dobError" style="display: none;"></div>
+                    <button id="dobConfirm" class="continue-btn">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Picture Upload Page -->
+        <div id="profilePicturePage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="profilePicturePageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>Add your profile picture</h2>
+                    <p class="auth-subtitle">Upload a profile picture from your gallery or camera</p>
+                </div>
+
+                <div class="profile-upload-form">
+                    <div class="profile-preview-container">
+                        <div id="profilePreview" class="profile-preview">
+                            <i class="fas fa-user profile-placeholder"></i>
+                        </div>
+                        <div class="upload-options">
+                            <label for="profilePictureInput" class="upload-btn gallery-btn">
+                                <i class="fas fa-images"></i>
+                                Choose from Gallery
+                            </label>
+                            <label for="profileCameraInput" class="upload-btn camera-btn">
+                                <i class="fas fa-camera"></i>
+                                Take Photo
+                            </label>
+                        </div>
+                        <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+                        <input type="file" id="profileCameraInput" accept="image/*" capture="environment" style="display: none;">
+                    </div>
+
+                    <div class="upload-status" id="uploadStatus" style="display: none;">
+                        <div class="upload-loading">
+                            <div class="upload-spinner"></div>
+                            <p>Processing image...</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-success-display" id="profileSuccessDisplay" style="display: none;">
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Profile picture uploaded successfully!</h4>
+                            <p>Your profile picture has been set and will be displayed in your profile.</p>
+                        </div>
+                    </div>
+
+                    <div class="auth-error" id="profilePictureError" style="display: none;"></div>
+
+                    <div class="profile-actions">
+                        <button id="skipProfilePicture" class="skip-btn">Skip for now</button>
+                        <button id="confirmProfilePicture" class="continue-btn" disabled>Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN Setup Page -->
+        <div id="pinSetupPage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="pinSetupPageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>Set your PIN</h2>
+                    <p class="auth-subtitle">Create a 5-digit PIN for security</p>
+                </div>
+
+                <div class="pin-container">
+                    <div class="pin-note">
+                        <p><i class="fas fa-lock"></i> Use only numbers (0-9)</p>
+                    </div>
+                    <div class="pin-inputs">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="0" id="pin1">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="1" id="pin2">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="2" id="pin3">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="3" id="pin4">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="4" id="pin5">
+                    </div>
+                    <div class="pin-error" id="pinSetupError" style="display: none;"></div>
+                    <button id="pinSetupSubmit" class="continue-btn">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN Confirm Page -->
+        <div id="pinConfirmPage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="pinConfirmPageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>Confirm your PIN</h2>
+                    <p class="auth-subtitle">Please enter your PIN again</p>
+                </div>
+
+                <div class="pin-container">
+                    <div class="pin-inputs">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="0" id="confirmPin1">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="1" id="confirmPin2">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="2" id="confirmPin3">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="3" id="confirmPin4">
+                        <input type="tel" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]" data-index="4" id="confirmPin5">
+                    </div>
+                    <div class="pin-error" id="confirmPinError" style="display: none;"></div>
+                    <button id="confirmPinSubmit" class="continue-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Verification Page -->
+        <div id="verificationPage" class="page">
+            <div class="auth-container">
+                <div class="page-header">
+                    <button id="verificationPageBack" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                <div class="auth-header">
+                    <h2>Verify your email</h2>
+                    <p class="auth-subtitle">We've sent a verification link to your email</p>
+                </div>
+
+                <div class="verification-content">
+                    <div class="verification-icon">
+                        <i class="fas fa-envelope-circle-check"></i>
+                    </div>
+                    <p>Please check your email and click the verification link to complete your registration.</p>
+                    <div class="verification-status" id="verificationStatus">
+                        <p>Checking verification status...</p>
+                    </div>
+                    <button id="resendEmail" class="secondary-btn">Resend Email</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resend Email Confirmation Modal -->
+        <div id="resendConfirmModal" class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3>Resend Verification Email?</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <p>Do you want to resend the verification email?</p>
+                </div>
+                <div class="modal-actions">
+                    <button id="confirmResend" class="modal-btn confirm-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Yes, Send
+                    </button>
+                    <button id="cancelResend" class="modal-btn cancel-btn">
+                        <i class="fas fa-times"></i>
+                        No, Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Page -->
+        <div id="successPage" class="page">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Account created successfully!</h2>
+                    <p class="auth-subtitle">Welcome to Real Tasker</p>
+                </div>
+
+                <div class="success-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <p>Your account has been created successfully. Redirecting to homepage...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suspended Page -->
+        <div id="suspendedPage" class="page">
+            <div class="suspended-container">
+                <div class="status-indicator"></div>
+
+                <div class="suspended-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+
+                <h1 class="logo-text">Real <span class="logo-accent">Tasker</span></h1>
+
+                <h2 class="suspended-title">Account Suspended</h2>
+
+                <p class="suspended-message">
+                    Your account has been temporarily suspended due to policy violations or security concerns. Please contact our support team for immediate assistance to resolve this matter and restore your account access.
+                </p>
+
+                <div class="contact-section">
+                    <h3 class="contact-title">Contact Support Team</h3>
+                    <div class="contact-buttons" id="contactButtons">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            Loading contact information...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="logout-section">
+                    <button id="suspendedLogoutBtn" class="logout-btn suspended-logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+
+                <p class="footer-text">
+                    If you believe this suspension is in error, please contact us immediately with your account details.
+                </p>
+            </div>
+        </div>
+
+        <!-- Notification Page -->
+        <div id="notificationPage" class="page">
+            <div class="home-container">
+                <header class="home-header">
+                    <div class="header-content">
+                        <div class="header-left">
+                            <button class="back-btn" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back to Home</span>
+                            </button>
+                            <div class="user-info">
+                                <h1 class="page-title">Notifications</h1>
+                                <span class="user-name">All Tasks & Updates</span>
+                            </div>
+                        </div>
+                        <div class="user-menu">
+                            <button class="notification-refresh-btn" onclick="loadNotificationPage()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="home-main">
+                    <div class="notification-page-section">
+                        <div class="notification-container" id="notificationPageContainer">
+                            <div class="loading-notifications">
+                                <div class="notification-loading-spinner"></div>
+                                <p>নোটিফিকেশন লোড হচ্ছে...</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+
+
+        <!-- History Page -->
+        <div id="historyPage" class="page">
+            <div class="home-container">
+                <header class="home-header">
+                    <div class="header-content">
+                        <div class="header-left">
+                            <button class="back-btn" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back to Home</span>
+                            </button>
+                            <div class="user-info">
+                                <h1 class="page-title">Task History</h1>
+                                <span class="user-name">Your completed tasks</span>
+                            </div>
+                        </div>
+                        <div class="user-menu">
+                            <button class="notification-refresh-btn" onclick="loadTaskHistory()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="home-main">
+                    <div class="history-container" id="historyContainer">
+                        <div class="loading-history">
+                            <div class="history-loading-spinner"></div>
+                            <p>Loading your task history...</p>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Daily Report Submission Checklist Page -->
+        <div id="dailyReportPage" class="page">
+            <div class="daily-report-container">
+                <header class="daily-report-header">
+                    <div class="daily-report-header-content">
+                        <div class="header-left-section">
+                            <button class="back-btn" onclick="showPage('homePage'); updateCurrentPageTitle('Home');">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                            <div class="header-title-section">
+                                <h1 class="daily-report-title">Daily Report Submission Checklist</h1>
+                                <span class="daily-report-subtitle">দৈনিক রিপোর্ট জমা দেওয়ার চেকলিস্ট</span>
+                            </div>
+                        </div>
+                        <div class="header-actions">
+                            <button class="refresh-checklist-btn" onclick="refreshChecklist()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="daily-report-main">
+                    <!-- Progress Summary Card -->
+                    <div class="progress-summary-card">
+                        <div class="progress-header">
+                            <div class="progress-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="progress-info">
+                                <h3>Today's Progress</h3>
+                                <p>আজকের অগ্রগতি</p>
+                            </div>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="completedTasks">0</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="pendingTasks">5</div>
+                                <div class="stat-label">Pending</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="completionRate">0%</div>
+                                <div class="stat-label">Complete</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checklist Items -->
+                    <div class="checklist-container">
+                        <div class="checklist-header">
+                            <h2>Daily Tasks Checklist</h2>
+                            <p>দৈনিক কাজের তালিকা</p>
+                        </div>
+
+                        <div class="checklist-items" id="checklistItems">
+                            <!-- Morning Tasks -->
+                            <div class="checklist-category">
+                                <div class="category-header">
+                                    <i class="fas fa-sun"></i>
+                                    <h3>Morning Tasks</h3>
+                                    <span class="category-subtitle">সকালের কাজসমূহ</span>
+                                </div>
+
+                                <div class="checklist-item" data-task="morning-review">
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" id="morning-review" onchange="updateProgress()">
+                                        <label for="morning-review" class="checkbox-custom"></label>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>Daily Review & Planning</h4>
+                                        <p>দৈনিক পর্যালোচনা ও পরিকল্পনা</p>
+                                        <div class="item-meta">
+                                            <span class="time-estimate"><i class="fas fa-clock"></i> 15 mins</span>
+                                            <span class="priority high"><i class="fas fa-exclamation-circle"></i> High</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="action-btn" onclick="openTaskDetails('morning-review')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item" data-task="team-standup">
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" id="team-standup" onchange="updateProgress()">
+                                        <label for="team-standup" class="checkbox-custom"></label>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>Team Standup Meeting</h4>
+                                        <p>টিম স্ট্যান্ডআপ মিটিং</p>
+                                        <div class="item-meta">
+                                            <span class="time-estimate"><i class="fas fa-clock"></i> 30 mins</span>
+                                            <span class="priority medium"><i class="fas fa-minus-circle"></i> Medium</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="action-btn" onclick="openTaskDetails('team-standup')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Afternoon Tasks -->
+                            <div class="checklist-category">
+                                <div class="category-header">
+                                    <i class="fas fa-sun-o"></i>
+                                    <h3>Afternoon Tasks</h3>
+                                    <span class="category-subtitle">দুপুরের কাজসমূহ</span>
+                                </div>
+
+                                <div class="checklist-item" data-task="project-update">
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" id="project-update" onchange="updateProgress()">
+                                        <label for="project-update" class="checkbox-custom"></label>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>Project Status Update</h4>
+                                        <p>প্রকল্পের অগ্রগতি আপডেট</p>
+                                        <div class="item-meta">
+                                            <span class="time-estimate"><i class="fas fa-clock"></i> 45 mins</span>
+                                            <span class="priority high"><i class="fas fa-exclamation-circle"></i> High</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="action-btn" onclick="openTaskDetails('project-update')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item" data-task="client-communication">
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" id="client-communication" onchange="updateProgress()">
+                                        <label for="client-communication" class="checkbox-custom"></label>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>Client Communication</h4>
+                                        <p>ক্লায়েন্ট যোগাযোগ</p>
+                                        <div class="item-meta">
+                                            <span class="time-estimate"><i class="fas fa-clock"></i> 20 mins</span>
+                                            <span class="priority medium"><i class="fas fa-minus-circle"></i> Medium</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="action-btn" onclick="openTaskDetails('client-communication')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Evening Tasks -->
+                            <div class="checklist-category">
+                                <div class="category-header">
+                                    <i class="fas fa-moon"></i>
+                                    <h3>Evening Tasks</h3>
+                                    <span class="category-subtitle">সন্ধ্যার কাজসমূহ</span>
+                                </div>
+
+                                <div class="checklist-item" data-task="daily-report">
+                                    <div class="item-checkbox">
+                                        <input type="checkbox" id="daily-report" onchange="updateProgress()">
+                                        <label for="daily-report" class="checkbox-custom"></label>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>Submit Daily Report</h4>
+                                        <p>দৈনিক রিপোর্ট জমা দিন</p>
+                                        <div class="item-meta">
+                                            <span class="time-estimate"><i class="fas fa-clock"></i> 25 mins</span>
+                                            <span class="priority high"><i class="fas fa-exclamation-circle"></i> High</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="action-btn" onclick="openTaskDetails('daily-report')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Report Button -->
+                        <div class="submit-section">
+                            <button class="submit-report-btn" id="submitReportBtn" onclick="submitDailyReport()" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Submit Daily Report</span>
+                                <span class="submit-subtitle">দৈনিক রিপোর্ট জমা দিন</span>
+                            </button>
+
+                            <div class="submit-note">
+                                <i class="fas fa-info-circle"></i>
+                                <p>সব কাজ সম্পন্ন করার পর রিপোর্ট জমা দিন। Complete all tasks before submitting the report.</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Marketplace Page -->
+        <div id="marketplacePage" class="page">
+            <div class="marketplace-page-container">
+                <header class="marketplace-header">
+                    <div class="marketplace-header-content">
+                        <div class="marketplace-header-left">
+                            <div class="marketplace-user-profile">
+                                <div class="marketplace-user-avatar" id="marketplaceUserAvatar">
+                                    <img id="marketplaceUserImage" src="" alt="Profile" style="display: none;">
+                                    <div class="marketplace-user-placeholder" id="marketplaceUserPlaceholder">
+                                        E
+                                    </div>
+                                </div>
+                                <div class="marketplace-user-info">
+                                    <h1 class="marketplace-title" id="marketplacePageTitle">Marketplace</h1>
+                                    <div class="marketplace-user-name" id="marketplaceUserName">Eyasin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marketplace-header-actions">
+                            <button class="marketplace-refresh-btn" onclick="loadMarketplaceProducts()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="marketplace-main">
+                    <div class="marketplace-products-container" id="marketplaceProductsContainer">
+                        <div class="loading-marketplace">
+                            <div class="marketplace-loading-spinner"></div>
+                            <p>Loading marketplace products...</p>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Navigation Bar for Marketplace -->
+                <nav class="bottom-navigation">
+                    <div class="nav-container">
+                        <button class="nav-button" data-tab="home" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </button>
+                        <button class="nav-button" data-tab="post">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="nav-label">Post</span>
+                        </button>
+                        <button class="nav-button" data-tab="chat" onclick="showChatInterface();">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="nav-label">Chat</span>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button class="nav-button" data-tab="leaderboard" onclick="showLeaderboard();">
+                            <i class="fas fa-trophy"></i>
+                            <span class="nav-label">Leaderboard</span>
+                        </button>
+                        <button class="nav-button" data-tab="profile" onclick="showProfileMenu();">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Chat Page -->
+        <div id="chatPage" class="page">
+            <div class="chat-container">
+                <!-- Chat Header -->
+                <header class="marketplace-header">
+                    <div class="marketplace-header-content">
+                        <div class="marketplace-header-left">
+                            <div class="marketplace-user-profile">
+                                <div class="marketplace-user-avatar" id="chatUserAvatar">
+                                    <img id="chatUserImage" src="" alt="Profile" style="display: none;">
+                                    <div class="marketplace-user-placeholder" id="chatUserPlaceholder">
+                                        E
+                                    </div>
+                                </div>
+                                <div class="marketplace-user-info">
+                                    <h1 class="marketplace-title">Chat</h1>
+                                    <div class="marketplace-user-name" id="chatUserName">Eyasin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marketplace-header-actions">
+                            <button class="marketplace-refresh-btn" onclick="loadChatMessages()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Chat Messages Container -->
+                <main class="chat-main">
+                    <div class="chat-contacts-container" id="chatContactsContainer">
+                        <!-- Admin Contact Card -->
+                        <div class="chat-contact-card admin-contact" onclick="openLiveChatPage()">
+                            <div class="contact-avatar">
+                                <div class="admin-avatar-circle">
+                                    <div class="admin-logo-background">
+                                        <i class="fas fa-dove"></i>
+                                    </div>
+                                </div>
+                                <div class="contact-status-dot active"></div>
+                            </div>
+                            <div class="contact-info">
+                                <h3 class="contact-name">admin</h3>
+                                <p class="contact-last-message">Available for support</p>
+                            </div>
+                            <div class="contact-meta">
+                                <div class="contact-verified">
+                                    <i class="fas fa-check-circle verified-icon"></i>
+                                </div>
+                                <div class="contact-time">online</div>
+                            </div>
+                        </div>
+
+                        <!-- Withdrawal History Button -->
+                        <div class="chat-contact-card withdrawal-history-card" onclick="alert('Withdrawal History এর জন্য এখানে ক্লিক করেছেন')">
+                            <div class="contact-avatar">
+                                <div class="withdrawal-avatar-circle">
+                                    <div class="withdrawal-logo-background">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-info">
+                                <h3 class="contact-name">Withdrawal History</h3>
+                                <p class="contact-last-message">View your withdrawal records</p>
+                            </div>
+                            <div class="contact-meta">
+                                <div class="contact-time">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div class="loading-contacts" style="display: none;">
+                            <div class="chat-loading-spinner"></div>
+                            <p>Loading contacts...</p>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div class="empty-contacts" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>No conversations yet</h3>
+                            <p>Start chatting with admin for support</p>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Navigation Bar for Chat Page -->
+                <nav class="bottom-navigation">
+                    <div class="nav-container">
+                        <button class="nav-button" data-tab="home" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </button>
+                        <button class="nav-button" data-tab="post">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="nav-label">Post</span>
+                        </button>
+                        <button class="nav-button active" data-tab="chat">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="nav-label">Chat</span>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button class="nav-button" data-tab="leaderboard">
+                            <i class="fas fa-trophy"></i>
+                            <span class="nav-label">Leaderboard</span>
+                        </button>
+                        <button class="nav-button" data-tab="profile" onclick="showProfileMenu()">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- bKash Style Live Chat Page -->
+        <div id="liveChatPage" class="page">
+            <div class="bkash-chat-container">
+                <!-- bKash Style Header -->
+                <header class="bkash-chat-header">
+                    <div class="bkash-header-content">
+                        <button class="bkash-back-btn" onclick="showPage('chatPage'); updateCurrentPageTitle('Chat');">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="bkash-logo-container">
+                            <div class="bkash-logo">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                            <h1 class="bkash-title">Real Tasker</h1>
+                        </div>
+                        <div class="bkash-header-actions">
+                            <button class="bkash-action-btn" onclick="refreshMessages()">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Chat Messages Area -->
+                <main class="bkash-chat-body">
+                    <div class="bkash-messages-container" id="bkashMessagesContainer">
+                        <!-- Chat Messages Area -->
+                        <div class="chat-messages-area" id="chatMessagesArea">
+                            <!-- Messages will be dynamically loaded here -->
+                        </div>
+
+                        <!-- Typing Indicator -->
+                        <div class="bkash-typing-indicator" id="bkashTypingIndicator" style="display: none;">
+                            <div class="typing-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="typing-bubble">
+                                <div class="typing-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- bKash Style Message Input -->
+                <footer class="bkash-message-input">
+                    <!-- Image Preview Area -->
+                    <div class="bkash-image-preview" id="bkashImagePreview" style="display: none;">
+                        <div class="image-preview-container">
+                            <img id="previewImage" src="" alt="Preview">
+                            <button class="remove-preview-btn" onclick="removeBkashImagePreview()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Container -->
+                    <div class="bkash-input-container">
+                        <div class="bkash-input-wrapper">
+                            <!-- Attachment Button -->
+                            <button class="bkash-attachment-btn" onclick="selectBkashImage()" title="Attach Image">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                            <!-- Message Input -->
+                            <div class="bkash-message-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="bkashMessageInput" 
+                                    placeholder="Type your message and press enter"
+                                    maxlength="1000"
+                                    onkeydown="handleBkashMessageKeydown(event)"
+                                    oninput="handleBkashMessageInput(this)"
+                                />
+                            </div>
+
+                            <!-- Emoji Button -->
+                            <button class="bkash-emoji-btn" onclick="toggleBkashEmoji()" title="Emoji">
+                                <i class="fas fa-smile"></i>
+                            </button>
+
+                            <!-- Send Button -->
+                            <button class="bkash-send-btn" id="bkashSendBtn" onclick="sendBkashMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="bkash-quick-actions" id="bkashQuickActions" style="display: none;">
+                            <button class="quick-action-btn" onclick="sendBkashQuickMessage('I need help')">
+                                <i class="fas fa-question-circle"></i>
+                                Help
+                            </button>
+                            <button class="quick-action-btn" onclick="sendBkashQuickMessage('Check my balance')">
+                                <i class="fas fa-wallet"></i>
+                                Balance
+                            </button>
+                            <button class="quick-action-btn" onclick="sendBkashQuickMessage('Payment issue')">
+                                <i class="fas fa-credit-card"></i>
+                                Payment
+                            </button>
+                        </div>
+
+                        <!-- File Input -->
+                        <input type="file" id="bkashFileInput" style="display: none;" accept="image/*,video/*,audio/*,application/pdf" onchange="handleBkashFileUpload(event)">
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Home Page -->
+        <div id="homePage" class="page">
+            <div class="home-container">
+                <header class="marketplace-header">
+                    <div class="marketplace-header-content">
+                        <div class="marketplace-header-left">
+                            <div class="marketplace-user-profile">
+                                <div class="marketplace-user-avatar" id="profilePictureHeader">
+                                    <img id="headerProfileImage" src="" alt="Profile" style="display: none;">
+                                    <div class="marketplace-user-placeholder" id="headerProfilePlaceholder">
+                                    </div>
+                                </div>
+                                <div class="marketplace-user-info">
+                                    <h1 class="marketplace-title" id="pageTitle">Home</h1>
+                                    <div class="marketplace-user-name" id="welcomeUser">Eyasin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marketplace-header-actions">
+                            <div style="position: relative;">
+                                <button id="notificationBtn" class="marketplace-refresh-btn">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="notification-badge" id="notificationCount">0</span>
+                                </button>
+
+                                <!-- Notification Dropdown -->
+                                <div id="notificationDropdown" class="notification-dropdown">
+                                    <div class="notification-header">
+                                        <h3>Notifications</h3>
+                                    </div>
+                                    <div class="notification-list" id="notificationList">
+                                        <div class="notification-empty">
+                                            <i class="fas fa-bell-slash"></i>
+                                            <p>No notifications yet</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="moreMenuBtn" class="marketplace-refresh-btn">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- More Menu Dropdown (Hidden) -->
+                <div id="moreMenuDropdown" class="more-menu-dropdown" style="display: none;">
+                </div>
+
+                <main class="home-main">
+                    <!-- Task Cards Section -->
+                    <div class="tasks-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-fire"></i> Latest Tasks & Updates</h2>
+                            <div class="refresh-btn" id="refreshTasks">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                        </div>
+
+                        <div class="tasks-container" id="tasksContainer">
+                            <div class="loading-tasks">
+                                <div class="task-loading-spinner"></div>
+                                <p>Loading tasks...</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Navigation Bar -->
+                <nav class="bottom-navigation">
+                    <div class="nav-container">
+                        <button class="nav-button active" data-tab="home">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </button>
+                        <button class="nav-button" data-tab="post">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="nav-label">Post</span>
+                        </button>
+                        <button class="nav-button" data-tab="chat">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="nav-label">Chat</span>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button class="nav-button" data-tab="leaderboard">
+                            <i class="fas fa-trophy"></i>
+                            <span class="nav-label">Leaderboard</span>
+                        </button>
+                        <button class="nav-button" data-tab="profile">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Withdrawal Page -->
+    <div id="withdrawalPage" class="page">
+        <div class="bkash-withdrawal-page">
+            <!-- Header with Geometric Background -->
+            <div class="bkash-withdrawal-header">
+                <!-- Geometric Background -->
+                <div class="geometric-background">
+                    <div class="geometric-shape shape-1"></div>
+                    <div class="geometric-shape shape-2"></div>
+                    <div class="geometric-shape shape-3"></div>
+                    <div class="geometric-shape shape-4"></div>
+                    <div class="geometric-shape shape-5"></div>
+
+                    <!-- Center Large Shape -->
+                    <div class="center-geometric">
+                        <div class="center-shape"></div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bkash-withdrawal-nav">
+                    <button class="withdrawal-back-btn" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h1 class="withdrawal-title">Withdraw Money</h1>
+                </div>
+
+                <!-- Balance Section -->
+                <div class="withdrawal-balance-section">
+                    <div class="balance-label">Available Balance</div>
+                    <div class="balance-amount" id="withdrawalBalance">$0.00</div>
+                    <div class="balance-subtitle">Your current withdrawable balance</div>
+                </div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="withdrawal-form-section">
+                <h2 class="form-title">Withdrawal Details</h2>
+
+                <form class="withdrawal-form" id="bkashWithdrawalForm">
+                    <div class="form-group">
+                        <label class="form-label">Amount (Min 2.00 USD / Max 1000.00 USD):</label>
+                        <input type="number" class="form-input" id="withdrawalAmountInput" 
+                               placeholder="Enter amount" min="2" max="1000" step="0.01" required>
+                        <div class="amount-limits">
+                            <span class="limit-item">Min: 2.00 USD</span>
+                            <span class="limit-item">Max: 1000.00 USD</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your wallet number</label>
+                        <div class="bengali-text">Please enter your email address:</div>
+                        <input type="email" class="form-input" id="walletNumberInput" 
+                               placeholder="Enter your email address" required>
+                    </div>
+
+                    <button type="submit" class="confirm-withdrawal-btn" id="confirmWithdrawalBtn">
+                        CONFIRM
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Details Page -->
+    <div id="withdrawalDetailsPage" class="page">
+        <div class="withdrawal-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Withdrawal Details</h1>
+        </div>
+
+        <div class="withdrawal-form-container">
+            <div class="selected-method-info" id="selectedMethodInfo">
+                <!-- Selected payment method info will be shown here -->
+            </div>
+
+            <form class="withdrawal-form" id="withdrawalForm">
+                <div class="form-group">
+                    <label for="withdrawAmount">Withdraw Amount ($)</label>
+                    <input type="number" id="withdrawAmount" min="1" step="0.01" placeholder="Enter amount" required>
+                    <div class="amount-limits" id="amountLimits">
+                        <!-- Min/max limits will be shown here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="withdrawEmail">Email Address</label>
+                    <input type="email" id="withdrawEmail" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="withdrawPhone">Phone Number</label>
+                    <input type="tel" id="withdrawPhone" placeholder="Enter your phone number" required>
+                </div>
+
+                <button type="submit" class="confirm-withdrawal-btn">
+                    <i class="fas fa-check"></i>
+                    Confirm Withdrawal
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Withdrawal History Details Page -->
+        <div id="withdrawalHistoryDetailsPage" class="page">
+            <div class="android-withdrawal-header">
+                <button class="android-back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="android-page-title">Withdrawal History</h1>
+            </div>
+
+            <div class="withdrawal-history-details-container">
+                <!-- Filter Buttons -->
+                <div class="history-filter-tabs">
+                    <button class="filter-tab active" onclick="filterHistory('all')">All</button>
+                    <button class="filter-tab" onclick="filterHistory('pending')">Pending</button>
+                    <button class="filter-tab" onclick="filterHistory('approved')">Approved</button>
+                    <button class="filter-tab" onclick="filterHistory('cancelled')">Cancelled</button>
+                </div>
+
+                <!-- History List Container -->
+                <div class="withdrawal-history-list-container" id="withdrawalHistoryListContainer">
+                    <div class="loading-history">
+                        <div class="history-loading-spinner"></div>
+                        <p>Loading withdrawal history...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal History Page -->
+        <div id="withdrawalHistoryPage" class="page">
+            <div class="android-withdrawal-header">
+                <button class="android-back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="android-page-title">Withdrawal</h1>
+            </div>
+
+            <div class="android-withdrawal-container">
+                <!-- Payment Method Categories Section -->
+                <div class="payment-categories-section">
+                    <!-- Recommended Methods -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-star"></i>
+                            RECOMMENDED METHODS
+                        </div>
+                        <div class="category-payment-grid" id="recommendedMethodsGrid">
+                            <!-- Recommended payment methods will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Cards -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-credit-card"></i>
+                            PAYMENT CARDS
+                        </div>
+                        <div class="category-payment-grid" id="paymentCardsGrid">
+                            <!-- Payment cards will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Systems -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-exchange-alt"></i>
+                            PAYMENT SYSTEMS
+                        </div>
+                        <div class="category-payment-grid" id="paymentSystemsGrid">
+                            <!-- Payment systems will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- E-Wallets -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-wallet"></i>
+                            E-WALLETS
+                        </div>
+                        <div class="category-payment-grid" id="eWalletsGrid">
+                            <!-- E-wallets will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-university"></i>
+                            BANK TRANSFER
+                        </div>
+                        <div class="category-payment-grid" id="bankTransferGrid">
+                            <!-- Bank transfer methods will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Internet Banking -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fas fa-globe"></i>
+                            INTERNET BANKING
+                        </div>
+                        <div class="category-payment-grid" id="internetBankingGrid">
+                            <!-- Internet banking methods will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Cryptocurrency -->
+                    <div class="payment-category-container">
+                        <div class="category-header">
+                            <i class="fab fa-bitcoin"></i>
+                            CRYPTOCURRENCY
+                        </div>
+                        <div class="category-payment-grid" id="cryptocurrencyGrid">
+                            <!-- Cryptocurrency methods will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+    <!-- Marketplace Page -->
+    </div>
+
+    <!-- Enhanced User Profile Modal -->
+    <div id="userProfileModal" class="modal-overlay profile-modal-overlay">
+        <div class="profile-modal-container">
+            <div class="profile-modal-header">
+                <div class="profile-header-content">
+                    <h3><i class="fas fa-user-circle"></i> Profile Information</h3>
+                    <button class="profile-modal-close" onclick="hideProfileModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-modal-body">
+                <!-- Profile Picture Section -->
+                <div class="profile-picture-section">
+                    <div class="profile-picture-large" id="profilePictureLarge">
+                        <img id="profileImageLarge" src="" alt="Profile" style="display: none;">
+                        <div class="profile-placeholder-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <!-- Edit Profile Pencil Icon -->
+                        <div class="profile-edit-icon" onclick="showEditProfilePage()">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                    </div>
+                    <div class="profile-name-section">
+                        <h2 class="profile-display-name" id="profileUserName">Loading...</h2>
+                        <p class="profile-email" id="profileEmail">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Profile Information Cards -->
+                <div class="profile-info-grid">
+                    <!-- User ID Card -->
+                    <div class="profile-info-card">
+                        <div class="card-header">
+                            <i class="fas fa-fingerprint"></i>
+                            <span>USER ID:</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="user-id-display">
+                                <span class="user-id-text" id="profileUserId">Loading...</span>
+                                <button class="copy-user-id-btn" id="copyUserIdBtn" onclick="copyUserId()">
+                                    <i class="fas fa-copy"></i>
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Balance Card -->
+                    <div class="profile-info-card balance-card">
+                        <div class="card-header">
+                            <i class="fas fa-wallet"></i>
+                            <span>BALANCE:</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="balance-display" id="profileBalance">$0.00</div>
+                        </div>
+                        <div class="balance-actions">
+                            <button class="balance-btn" onclick="showEarningsModal()">
+                                <i class="fas fa-chart-line"></i>
+                                View Earnings
+                            </button>
+                            <button class="balance-btn secondary" onclick="showWithdrawPage()">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="profile-additional-info">
+                    <div class="profile-note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Your unique 7-digit User ID for account identification</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-modal-footer">
+                <button class="profile-close-btn" onclick="hideProfileModal()">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Page -->
+    <div id="editProfilePage" class="page">
+        <div class="edit-profile-container">
+            <header class="edit-profile-header">
+                <div class="edit-profile-header-content">
+                    <button class="back-btn" onclick="hideEditProfilePage()">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <div class="header-title">
+                        <h2>Edit Profile</h2>
+                    </div>
+                    <button class="save-btn" id="saveProfileBtn" onclick="saveProfile()">Save</button>
+                </div>
+            </header>
+
+            <main class="edit-profile-main">
+                <div class="profile-picture-section">
+                    <div class="edit-profile-picture">
+                        <img id="editProfileImage" src="" alt="Profile" style="display: none;">
+                        <div class="edit-profile-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="upload-picture-btn">
+                        <label for="editProfilePictureInput">Change Picture</label>
+                        <input type="file" id="editProfilePictureInput" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="profile-form">
+                    <div class="form-group">
+                        <label for="editFullName" class="required">Your Full Name</label>
+                        <input type="text" id="editFullName" placeholder="Enter your full name" required>
+                        <div class="validation-message error" id="nameValidation">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Please enter your full name</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editUsername">Username</label>
+                        <input type="text" id="editUsername" placeholder="Enter your username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail">Email Address</label>
+                        <input type="email" id="editEmail" placeholder="Enter your email address" readonly>
+                    </div>
+
+                    <div class="form-group gender-selection">
+                        <label class="required">Select your gender</label>
+                        <div class="gender-options">
+                            <div class="gender-option">
+                                <input type="radio" id="genderMale" name="gender" value="male">
+                                <label for="genderMale">
+                                    <i class="fas fa-mars"></i>
+                                    Male
+                                </label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="genderFemale" name="gender" value="female">
+                                <label for="genderFemale">
+                                    <i class="fas fa-venus"></i>
+                                    Female
+                                </label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="genderOther" name="gender" value="other">
+                                <label for="genderOther">
+                                    <i class="fas fa-genderless"></i>
+                                    Other
+                                </label>
+                            </div>
+                        </div>
+                        <div class="validation-message error" id="genderValidation">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Please select your gender</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEducation">Your Educational Qualification</label>
+                        <select id="editEducation">
+                            <option value="">Select your education level</option>
+                            <option value="high-school">High School</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Your Mobile Number for Verification</label>
+
+                        <!-- Country Code Selection -->
+                        <div class="country-code-container">
+                            <div class="country-flag">🇧🇩</div>
+                            <span class="country-name">Bangladesh</span>
+                            <span class="country-code">+880</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                            <select class="hidden-country-select" id="countryCodeSelect">
+                                <option value="+93" data-flag="🇦🇫" data-name="Afghanistan">🇦🇫 Afghanistan +93</option>
+                                <option value="+355" data-flag="🇦🇱" data-name="Albania">🇦🇱 Albania +355</option>
+                                <option value="+213" data-flag="🇩🇿" data-name="Algeria">🇩🇿 Algeria +213</option>
+                                <option value="+1684" data-flag="🇦🇸" data-name="American Samoa">🇦🇸 American Samoa +1684</option>
+                                <option value="+376" data-flag="🇦🇩" data-name="Andorra">🇦🇩 Andorra +376</option>
+                                <option value="+244" data-flag="🇦🇴" data-name="Angola">🇦🇴 Angola +244</option>
+                                <option value="+1264" data-flag="🇦🇮" data-name="Anguilla">🇦🇮 Anguilla +1264</option>
+                                <option value="+1268" data-flag="🇦🇬" data-name="Antigua and Barbuda">🇦🇬 Antigua and Barbuda +1268</option>
+                                <option value="+54" data-flag="🇦🇷" data-name="Argentina">🇦🇷 Argentina +54</option>
+                                <option value="+374" data-flag="🇦🇲" data-name="Armenia">🇦🇲 Armenia +374</option>
+                                <option value="+297" data-flag="🇦🇼" data-name="Aruba">🇦🇼 Aruba +297</option>
+                                <option value="+61" data-flag="🇦🇺" data-name="Australia">🇦🇺 Australia +61</option>
+                                <option value="+43" data-flag="🇦🇹" data-name="Austria">🇦🇹 Austria +43</option>
+                                <option value="+994" data-flag="🇦🇿" data-name="Azerbaijan">🇦🇿 Azerbaijan +994</option>
+                                <option value="+1242" data-flag="🇧🇸" data-name="Bahamas">🇧🇸 Bahamas +1242</option>
+                                <option value="+973" data-flag="🇧🇭" data-name="Bahrain">🇧🇭 Bahrain +973</option>
+                                <option value="+880" data-flag="🇧🇩" data-name="Bangladesh">🇧🇩 Bangladesh +880</option>
+                                <option value="+1246" data-flag="🇧🇧" data-name="Barbados">🇧🇧 Barbados +1246</option>
+                                <option value="+375" data-flag="🇧🇾" data-name="Belarus">🇧🇾 Belarus +375</option>
+                                <option value="+32" data-flag="🇧🇪" data-name="Belgium">🇧🇪 Belgium +32</option>
+                                <option value="+501" data-flag="🇧🇿" data-name="Belize">🇧🇿 Belize +501</option>
+                                <option value="+229" data-flag="🇧🇯" data-name="Benin">🇧🇯 Benin +229</option>
+                                <option value="+1441" data-flag="🇧🇲" data-name="Bermuda">🇧🇲 Bermuda +1441</option>
+                                <option value="+975" data-flag="🇧🇹" data-name="Bhutan">🇧🇹 Bhutan +975</option>
+                                <option value="+591" data-flag="🇧🇴" data-name="Bolivia">🇧🇴 Bolivia +591</option>
+                                <option value="+387" data-flag="🇧🇦" data-name="Bosnia and Herzegovina">🇧🇦 Bosnia and Herzegovina +387</option>
+                                <option value="+267" data-flag="🇧🇼" data-name="Botswana">🇧🇼 Botswana +267</option>
+                                <option value="+55" data-flag="🇧🇷" data-name="Brazil">🇧🇷 Brazil +55</option>
+                                <option value="+673" data-flag="🇧🇳" data-name="Brunei">🇧🇳 Brunei +673</option>
+                                <option value="+359" data-flag="🇧🇬" data-name="Bulgaria">🇧🇬 Bulgaria +359</option>
+                                <option value="+226" data-flag="🇧🇫" data-name="Burkina Faso">🇧🇫 Burkina Faso +226</option>
+                                <option value="+257" data-flag="🇧🇮" data-name="Burundi">🇧🇮 Burundi +257</option>
+                                <option value="+855" data-flag="🇰🇭" data-name="Cambodia">🇰🇭 Cambodia +855</option>
+                                <option value="+237" data-flag="🇨🇲" data-name="Cameroon">🇨🇲 Cameroon +237</option>
+                                <option value="+1" data-flag="🇨🇦" data-name="Canada">🇨🇦 Canada +1</option>
+                                <option value="+238" data-flag="🇨🇻" data-name="Cape Verde">🇨🇻 Cape Verde +238</option>
+                                <option value="+1345" data-flag="🇰🇾" data-name="Cayman Islands">🇰🇾 Cayman Islands +1345</option>
+                                <option value="+236" data-flag="🇨🇫" data-name="Central African Republic">🇨🇫 Central African Republic +236</option>
+                                <option value="+235" data-flag="🇹🇩" data-name="Chad">🇹🇩 Chad +235</option>
+                                <option value="+56" data-flag="🇨🇱" data-name="Chile">🇨🇱 Chile +56</option>
+                                <option value="+86" data-flag="🇨🇳" data-name="China">🇨🇳 China +86</option>
+                                <option value="+57" data-flag="🇨🇴" data-name="Colombia">🇨🇴 Colombia +57</option>
+                                <option value="+269" data-flag="🇰🇲" data-name="Comoros">🇰🇲 Comoros +269</option>
+                                <option value="+242" data-flag="🇨🇬" data-name="Congo">🇨🇬 Congo +242</option>
+                                <option value="+243" data-flag="🇨🇩" data-name="Congo (DRC)">🇨🇩 Congo (DRC) +243</option>
+                                <option value="+682" data-flag="🇨🇰" data-name="Cook Islands">🇨🇰 Cook Islands +682</option>
+                                <option value="+506" data-flag="🇨🇷" data-name="Costa Rica">🇨🇷 Costa Rica +506</option>
+                                <option value="+225" data-flag="🇨🇮" data-name="Côte d'Ivoire">🇨🇮 Côte d'Ivoire +225</option>
+                                <option value="+385" data-flag="🇭🇷" data-name="Croatia">🇭🇷 Croatia +385</option>
+                                <option value="+53" data-flag="🇨🇺" data-name="Cuba">🇨🇺 Cuba +53</option>
+                                <option value="+357" data-flag="🇨🇾" data-name="Cyprus">🇨🇾 Cyprus +357</option>
+                                <option value="+420" data-flag="🇨🇿" data-name="Czech Republic">🇨🇿 Czech Republic +420</option>
+                                <option value="+45" data-flag="🇩🇰" data-name="Denmark">🇩🇰 Denmark +45</option>
+                                <option value="+253" data-flag="🇩🇯" data-name="Djibouti">🇩🇯 Djibouti +253</option>
+                                <option value="+1767" data-flag="🇩🇲" data-name="Dominica">🇩🇲 Dominica +1767</option>
+                                <option value="+1809" data-flag="🇩🇴" data-name="Dominican Republic">🇩🇴 Dominican Republic +1809</option>
+                                <option value="+593" data-flag="🇪🇨" data-name="Ecuador">🇪🇨 Ecuador +593</option>
+                                <option value="+20" data-flag="🇪🇬" data-name="Egypt">🇪🇬 Egypt +20</option>
+                                <option value="+503" data-flag="🇸🇻" data-name="El Salvador">🇸🇻 El Salvador +503</option>
+                                <option value="+240" data-flag="🇬🇶" data-name="Equatorial Guinea">🇬🇶 Equatorial Guinea +240</option>
+                                <option value="+291" data-flag="🇪🇷" data-name="Eritrea">🇪🇷 Eritrea +291</option>
+                                <option value="+372" data-flag="🇪🇪" data-name="Estonia">🇪🇪 Estonia +372</option>
+                                <option value="+251" data-flag="🇪🇹" data-name="Ethiopia">🇪🇹 Ethiopia +251</option>
+                                <option value="+679" data-flag="🇫🇯" data-name="Fiji">🇫🇯 Fiji +679</option>
+                                <option value="+358" data-flag="🇫🇮" data-name="Finland">🇫🇮 Finland +358</option>
+                                <option value="+33" data-flag="🇫🇷" data-name="France">🇫🇷 France +33</option>
+                                <option value="+594" data-flag="🇬🇫" data-name="French Guiana">🇬🇫 French Guiana +594</option>
+                                <option value="+689" data-flag="🇵🇫" data-name="French Polynesia">🇵🇫 French Polynesia +689</option>
+                                <option value="+241" data-flag="🇬🇦" data-name="Gabon">🇬🇦 Gabon +241</option>
+                                <option value="+220" data-flag="🇬🇲" data-name="Gambia">🇬🇲 Gambia +220</option>
+                                <option value="+995" data-flag="🇬🇪" data-name="Georgia">🇬🇪 Georgia +995</option>
+                                <option value="+49" data-flag="🇩🇪" data-name="Germany">🇩🇪 Germany +49</option>
+                                <option value="+233" data-flag="🇬🇭" data-name="Ghana">🇬🇭 Ghana +233</option>
+                                <option value="+350" data-flag="🇬🇮" data-name="Gibraltar">🇬🇮 Gibraltar +350</option>
+                                <option value="+30" data-flag="🇬🇷" data-name="Greece">🇬🇷 Greece +30</option>
+                                <option value="+299" data-flag="🇬🇱" data-name="Greenland">🇬🇱 Greenland +299</option>
+                                <option value="+1473" data-flag="🇬🇩" data-name="Grenada">🇬🇩 Grenada +1473</option>
+                                <option value="+590" data-flag="🇬🇵" data-name="Guadeloupe">🇬🇵 Guadeloupe +590</option>
+                                <option value="+1671" data-flag="🇬🇺" data-name="Guam">🇬🇺 Guam +1671</option>
+                                <option value="+502" data-flag="🇬🇹" data-name="Guatemala">🇬🇹 Guatemala +502</option>
+                                <option value="+224" data-flag="🇬🇳" data-name="Guinea">🇬🇳 Guinea +224</option>
+                                <option value="+245" data-flag="🇬🇼" data-name="Guinea-Bissau">🇬🇼 Guinea-Bissau +245</option>
+                                <option value="+592" data-flag="🇬🇾" data-name="Guyana">🇬🇾 Guyana +592</option>
+                                <option value="+509" data-flag="🇭🇹" data-name="Haiti">🇭🇹 Haiti +509</option>
+                                <option value="+504" data-flag="🇭🇳" data-name="Honduras">🇭🇳 Honduras +504</option>
+                                <option value="+852" data-flag="🇭🇰" data-name="Hong Kong">🇭🇰 Hong Kong +852</option>
+                                <option value="+36" data-flag="🇭🇺" data-name="Hungary">🇭🇺 Hungary +36</option>
+                                <option value="+354" data-flag="🇮🇸" data-name="Iceland">🇮🇸 Iceland +354</option>
+                                <option value="+91" data-flag="🇮🇳" data-name="India">🇮🇳 India +91</option>
+                                <option value="+62" data-flag="🇮🇩" data-name="Indonesia">🇮🇩 Indonesia +62</option>
+                                <option value="+98" data-flag="🇮🇷" data-name="Iran">🇮🇷 Iran +98</option>
+                                <option value="+964" data-flag="🇮🇶" data-name="Iraq">🇮🇶 Iraq +964</option>
+                                <option value="+353" data-flag="🇮🇪" data-name="Ireland">🇮🇪 Ireland +353</option>
+                                <option value="+972" data-flag="🇮🇱" data-name="Israel">🇮🇱 Israel +972</option>
+                                <option value="+39" data-flag="🇮🇹" data-name="Italy">🇮🇹 Italy +39</option>
+                                <option value="+1876" data-flag="🇯🇲" data-name="Jamaica">🇯🇲 Jamaica +1876</option>
+                                <option value="+81" data-flag="🇯🇵" data-name="Japan">🇯🇵 Japan +81</option>
+                                <option value="+962" data-flag="🇯🇴" data-name="Jordan">🇯🇴 Jordan +962</option>
+                                <option value="+7" data-flag="🇰🇿" data-name="Kazakhstan">🇰🇿 Kazakhstan +7</option>
+                                <option value="+254" data-flag="🇰🇪" data-name="Kenya">🇰🇪 Kenya +254</option>
+                                <option value="+686" data-flag="🇰🇮" data-name="Kiribati">🇰🇮 Kiribati +686</option>
+                                <option value="+850" data-flag="🇰🇵" data-name="North Korea">🇰🇵 North Korea +850</option>
+                                <option value="+82" data-flag="🇰🇷" data-name="South Korea">🇰🇷 South Korea +82</option>
+                                <option value="+965" data-flag="🇰🇼" data-name="Kuwait">🇰🇼 Kuwait +965</option>
+                                <option value="+996" data-flag="🇰🇬" data-name="Kyrgyzstan">🇰🇬 Kyrgyzstan +996</option>
+                                <option value="+856" data-flag="🇱🇦" data-name="Laos">🇱🇦 Laos +856</option>
+                                <option value="+371" data-flag="🇱🇻" data-name="Latvia">🇱🇻 Latvia +371</option>
+                                <option value="+961" data-flag="🇱🇧" data-name="Lebanon">🇱🇧 Lebanon +961</option>
+                                <option value="+266" data-flag="🇱🇸" data-name="Lesotho">🇱🇸 Lesotho +266</option>
+                                <option value="+231" data-flag="🇱🇷" data-name="Liberia">🇱🇷 Liberia +231</option>
+                                <option value="+218" data-flag="🇱🇾" data-name="Libya">🇱🇾 Libya +218</option>
+                                <option value="+423" data-flag="🇱🇮" data-name="Liechtenstein">🇱🇮 Liechtenstein +423</option>
+                                <option value="+370" data-flag="🇱🇹" data-name="Lithuania">🇱🇹 Lithuania +370</option>
+                                <option value="+352" data-flag="🇱🇺" data-name="Luxembourg">🇱🇺 Luxembourg +352</option>
+                                <option value="+853" data-flag="🇲🇴" data-name="Macao">🇲🇴 Macao +853</option>
+                                <option value="+389" data-flag="🇲🇰" data-name="North Macedonia">🇲🇰 North Macedonia +389</option>
+                                <option value="+261" data-flag="🇲🇬" data-name="Madagascar">🇲🇬 Madagascar +261</option>
+                                <option value="+265" data-flag="🇲🇼" data-name="Malawi">🇲🇼 Malawi +265</option>
+                                <option value="+60" data-flag="🇲🇾" data-name="Malaysia">🇲🇾 Malaysia +60</option>
+                                <option value="+960" data-flag="🇲🇻" data-name="Maldives">🇲🇻 Maldives +960</option>
+                                <option value="+223" data-flag="🇲🇱" data-name="Mali">🇲🇱 Mali +223</option>
+                                <option value="+356" data-flag="🇲🇹" data-name="Malta">🇲🇹 Malta +356</option>
+                                <option value="+692" data-flag="🇲🇭" data-name="Marshall Islands">🇲🇭 Marshall Islands +692</option>
+                                <option value="+596" data-flag="🇲🇶" data-name="Martinique">🇲🇶 Martinique +596</option>
+                                <option value="+222" data-flag="🇲🇷" data-name="Mauritania">🇲🇷 Mauritania +222</option>
+                                <option value="+230" data-flag="🇲🇺" data-name="Mauritius">🇲🇺 Mauritius +230</option>
+                                <option value="+262" data-flag="🇾🇹" data-name="Mayotte">🇾🇹 Mayotte +262</option>
+                                <option value="+52" data-flag="🇲🇽" data-name="Mexico">🇲🇽 Mexico +52</option>
+                                <option value="+691" data-flag="🇫🇲" data-name="Micronesia">🇫🇲 Micronesia +691</option>
+                                <option value="+373" data-flag="🇲🇩" data-name="Moldova">🇲🇩 Moldova +373</option>
+                                <option value="+377" data-flag="🇲🇨" data-name="Monaco">🇲🇨 Monaco +377</option>
+                                <option value="+976" data-flag="🇲🇳" data-name="Mongolia">🇲🇳 Mongolia +976</option>
+                                <option value="+382" data-flag="🇲🇪" data-name="Montenegro">🇲🇪 Montenegro +382</option>
+                                <option value="+1664" data-flag="🇲🇸" data-name="Montserrat">🇲🇸 Montserrat +1664</option>
+                                <option value="+212" data-flag="🇲🇦" data-name="Morocco">🇲🇦 Morocco +212</option>
+                                <option value="+258" data-flag="🇲🇿" data-name="Mozambique">🇲🇿 Mozambique +258</option>
+                                <option value="+95" data-flag="🇲🇲" data-name="Myanmar">🇲🇲 Myanmar +95</option>
+                                <option value="+264" data-flag="🇳🇦" data-name="Namibia">🇳🇦 Namibia +264</option>
+                                <option value="+674" data-flag="🇳🇷" data-name="Nauru">🇳🇷 Nauru +674</option>
+                                <option value="+977" data-flag="🇳🇵" data-name="Nepal">🇳🇵 Nepal +977</option>
+                                <option value="+31" data-flag="🇳🇱" data-name="Netherlands">🇳🇱 Netherlands +31</option>
+                                <option value="+687" data-flag="🇳🇨" data-name="New Caledonia">🇳🇨 New Caledonia +687</option>
+                                <option value="+64" data-flag="🇳🇿" data-name="New Zealand">🇳🇿 New Zealand +64</option>
+                                <option value="+505" data-flag="🇳🇮" data-name="Nicaragua">🇳🇮 Nicaragua +505</option>
+                                <option value="+227" data-flag="🇳🇪" data-name="Niger">🇳🇪 Niger +227</option>
+                                <option value="+234" data-flag="🇳🇬" data-name="Nigeria">🇳🇬 Nigeria +234</option>
+                                <option value="+683" data-flag="🇳🇺" data-name="Niue">🇳🇺 Niue +683</option>
+                                <option value="+672" data-flag="🇳🇫" data-name="Norfolk Island">🇳🇫 Norfolk Island +672</option>
+                                <option value="+1670" data-flag="🇲🇵" data-name="Northern Mariana Islands">🇲🇵 Northern Mariana Islands +1670</option>
+                                <option value="+47" data-flag="🇳🇴" data-name="Norway">🇳🇴 Norway +47</option>
+                                <option value="+968" data-flag="🇴🇲" data-name="Oman">🇴🇲 Oman +968</option>
+                                <option value="+92" data-flag="🇵🇰" data-name="Pakistan">🇵🇰 Pakistan +92</option>
+                                <option value="+680" data-flag="🇵🇼" data-name="Palau">🇵🇼 Palau +680</option>
+                                <option value="+970" data-flag="🇵🇸" data-name="Palestine">🇵🇸 Palestine +970</option>
+                                <option value="+507" data-flag="🇵🇦" data-name="Panama">🇵🇦 Panama +507</option>
+                                <option value="+675" data-flag="🇵🇬" data-name="Papua New Guinea">🇵🇬 Papua New Guinea +675</option>
+                                <option value="+595" data-flag="🇵🇾" data-name="Paraguay">🇵🇾 Paraguay +595</option>
+                                <option value="+51" data-flag="🇵🇪" data-name="Peru">🇵🇪 Peru +51</option>
+                                <option value="+63" data-flag="🇵🇭" data-name="Philippines">🇵🇭 Philippines +63</option>
+                                <option value="+48" data-flag="🇵🇱" data-name="Poland">🇵🇱 Poland +48</option>
+                                <option value="+351" data-flag="🇵🇹" data-name="Portugal">🇵🇹 Portugal +351</option>
+                                <option value="+1787" data-flag="🇵🇷" data-name="Puerto Rico">🇵🇷 Puerto Rico +1787</option>
+                                <option value="+974" data-flag="🇶🇦" data-name="Qatar">🇶🇦 Qatar +974</option>
+                                <option value="+262" data-flag="🇷🇪" data-name="Réunion">🇷🇪 Réunion +262</option>
+                                <option value="+40" data-flag="🇷🇴" data-name="Romania">🇷🇴 Romania +40</option>
+                                <option value="+7" data-flag="🇷🇺" data-name="Russia">🇷🇺 Russia +7</option>
+                                <option value="+250" data-flag="🇷🇼" data-name="Rwanda">🇷🇼 Rwanda +250</option>
+                                <option value="+590" data-flag="🇧🇱" data-name="Saint Barthélemy">🇧🇱 Saint Barthélemy +590</option>
+                                <option value="+290" data-flag="🇸🇭" data-name="Saint Helena">🇸🇭 Saint Helena +290</option>
+                                <option value="+1869" data-flag="🇰🇳" data-name="Saint Kitts and Nevis">🇰🇳 Saint Kitts and Nevis +1869</option>
+                                <option value="+1758" data-flag="🇱🇨" data-name="Saint Lucia">🇱🇨 Saint Lucia +1758</option>
+                                <option value="+590" data-flag="🇲🇫" data-name="Saint Martin">🇲🇫 Saint Martin +590</option>
+                                <option value="+508" data-flag="🇵🇲" data-name="Saint Pierre and Miquelon">🇵🇲 Saint Pierre and Miquelon +508</option>
+                                <option value="+1784" data-flag="🇻🇨" data-name="Saint Vincent and the Grenadines">🇻🇨 Saint Vincent and the Grenadines +1784</option>
+                                <option value="+685" data-flag="🇼🇸" data-name="Samoa">🇼🇸 Samoa +685</option>
+                                <option value="+378" data-flag="🇸🇲" data-name="San Marino">🇸🇲 San Marino +378</option>
+                                <option value="+239" data-flag="🇸🇹" data-name="São Tomé and Príncipe">🇸🇹 São Tomé and Príncipe +239</option>
+                                <option value="+966" data-flag="🇸🇦" data-name="Saudi Arabia">🇸🇦 Saudi Arabia +966</option>
+                                <option value="+221" data-flag="🇸🇳" data-name="Senegal">🇸🇳 Senegal +221</option>
+                                <option value="+381" data-flag="🇷🇸" data-name="Serbia">🇷🇸 Serbia +381</option>
+                                <option value="+248" data-flag="🇸🇨" data-name="Seychelles">🇸🇨 Seychelles +248</option>
+                                <option value="+232" data-flag="🇸🇱" data-name="Sierra Leone">🇸🇱 Sierra Leone +232</option>
+                                <option value="+65" data-flag="🇸🇬" data-name="Singapore">🇸🇬 Singapore +65</option>
+                                <option value="+1721" data-flag="🇸🇽" data-name="Sint Maarten">🇸🇽 Sint Maarten +1721</option>
+                                <option value="+421" data-flag="🇸🇰" data-name="Slovakia">🇸🇰 Slovakia +421</option>
+                                <option value="+386" data-flag="🇸🇮" data-name="Slovenia">🇸🇮 Slovenia +386</option>
+                                <option value="+677" data-flag="🇸🇧" data-name="Solomon Islands">🇸🇧 Solomon Islands +677</option>
+                                <option value="+252" data-flag="🇸🇴" data-name="Somalia">🇸🇴 Somalia +252</option>
+                                <option value="+27" data-flag="🇿🇦" data-name="South Africa">🇿🇦 South Africa +27</option>
+                                <option value="+34" data-flag="🇪🇸" data-name="Spain">🇪🇸 Spain +34</option>
+                                <option value="+94" data-flag="🇱🇰" data-name="Sri Lanka">🇱🇰 Sri Lanka +94</option>
+                                <option value="+249" data-flag="🇸🇩" data-name="Sudan">🇸🇩 Sudan +249</option>
+                                <option value="+597" data-flag="🇸🇷" data-name="Suriname">🇸🇷 Suriname +597</option>
+                                <option value="+268" data-flag="🇸🇿" data-name="Eswatini">🇸🇿 Eswatini +268</option>
+                                <option value="+46" data-flag="🇸🇪" data-name="Sweden">🇸🇪 Sweden +46</option>
+                                <option value="+41" data-flag="🇨🇭" data-name="Switzerland">🇨🇭 Switzerland +41</option>
+                                <option value="+963" data-flag="🇸🇾" data-name="Syria">🇸🇾 Syria +963</option>
+                                <option value="+886" data-flag="🇹🇼" data-name="Taiwan">🇹🇼 Taiwan +886</option>
+                                <option value="+992" data-flag="🇹🇯" data-name="Tajikistan">🇹🇯 Tajikistan +992</option>
+                                <option value="+255" data-flag="🇹🇿" data-name="Tanzania">🇹🇿 Tanzania +255</option>
+                                <option value="+66" data-flag="🇹🇭" data-name="Thailand">🇹🇭 Thailand +66</option>
+                                <option value="+670" data-flag="🇹🇱" data-name="Timor-Leste">🇹🇱 Timor-Leste +670</option>
+                                <option value="+228" data-flag="🇹🇬" data-name="Togo">🇹🇬 Togo +228</option>
+                                <option value="+690" data-flag="🇹🇰" data-name="Tokelau">🇹🇰 Tokelau +690</option>
+                                <option value="+676" data-flag="🇹🇴" data-name="Tonga">🇹🇴 Tonga +676</option>
+                                <option value="+1868" data-flag="🇹🇹" data-name="Trinidad and Tobago">🇹🇹 Trinidad and Tobago +1868</option>
+                                <option value="+216" data-flag="🇹🇳" data-name="Tunisia">🇹🇳 Tunisia +216</option>
+                                <option value="+90" data-flag="🇹🇷" data-name="Turkey">🇹🇷 Turkey +90</option>
+                                <option value="+993" data-flag="🇹🇲" data-name="Turkmenistan">🇹🇲 Turkmenistan +993</option>
+                                <option value="+1649" data-flag="🇹🇨" data-name="Turks and Caicos Islands">🇹🇨 Turks and Caicos Islands +1649</option>
+                                <option value="+688" data-flag="🇹🇻" data-name="Tuvalu">🇹🇻 Tuvalu +688</option>
+                                <option value="+256" data-flag="🇺🇬" data-name="Uganda">🇺🇬 Uganda +256</option>
+                                <option value="+380" data-flag="🇺🇦" data-name="Ukraine">🇺🇦 Ukraine +380</option>
+                                <option value="+971" data-flag="🇦🇪" data-name="United Arab Emirates">🇦🇪 United Arab Emirates +971</option>
+                                <option value="+44" data-flag="🇬🇧" data-name="United Kingdom">🇬🇧 United Kingdom +44</option>
+                                <option value="+1" data-flag="🇺🇸" data-name="United States">🇺🇸 United States +1</option>
+                                <option value="+598" data-flag="🇺🇾" data-name="Uruguay">🇺🇾 Uruguay +598</option>
+                                <option value="+998" data-flag="🇺🇿" data-name="Uzbekistan">🇺🇿 Uzbekistan +998</option>
+                                <option value="+678" data-flag="🇻🇺" data-name="Vanuatu">🇻🇺 Vanuatu +678</option>
+                                <option value="+379" data-flag="🇻🇦" data-name="Vatican City">🇻🇦 Vatican City +379</option>
+                                <option value="+58" data-flag="🇻🇪" data-name="Venezuela">🇻🇪 Venezuela +58</option>
+                                <option value="+84" data-flag="🇻🇳" data-name="Vietnam">🇻🇳 Vietnam +84</option>
+                                <option value="+1284" data-flag="🇻🇬" data-name="British Virgin Islands">🇻🇬 British Virgin Islands +1284</option>
+                                <option value="+1340" data-flag="🇻🇮" data-name="U.S. Virgin Islands">🇻🇮 U.S. Virgin Islands +1340</option>
+                                <option value="+681" data-flag="🇼🇫" data-name="Wallis and Futuna">🇼🇫 Wallis and Futuna +681</option>
+                                <option value="+212" data-flag="🇪🇭" data-name="Western Sahara">🇪🇭 Western Sahara +212</option>
+                                <option value="+967" data-flag="🇾🇪" data-name="Yemen">🇾🇪 Yemen +967</option>
+                                <option value="+260" data-flag="🇿🇲" data-name="Zambia">🇿🇲 Zambia +260</option>
+                                <option value="+263" data-flag="🇿🇼" data-name="Zimbabwe">🇿🇼 Zimbabwe +263</option>
+                            </select>
+                        </div>
+
+                        <!-- Mobile Number Input -->
+                        <div class="mobile-number-container">
+                            <input type="tel" class="mobile-number-input" id="editMobileNumber" 
+                                   placeholder="01852138574" maxlength="15">
+                        </div>
+
+                        <div class="validation-message error" id="mobileValidation">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Enter a valid phone number</span>
+                        </div>
+                        <div class="validation-message info" id="mobileInfo" style="display: block;">
+                            <i class="fas fa-info-circle"></i>
+                            <span>This number will be used for account verification and security</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <div class="dob-container">
+                            <div class="dob-inputs">
+                                <input type="number" class="dob-input" id="editBirthDay" 
+                                       placeholder="Day" min="1" max="31">
+                                <select class="dob-input" id="editBirthMonth">
+                                    <option value="">Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <input type="number" class="dob-input" id="editBirthYear" 
+                                       placeholder="Year" min="1950" max="2010">
+                            </div>
+                        </div>
+                        <div class="validation-message error" id="dobValidation">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Please enter a valid date of birth</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editBio">Bio</label>
+                        <textarea id="editBio" rows="4" placeholder="Tell us something about yourself..." maxlength="500"></textarea>
+                        <div class="character-counter" id="bioCharacterCounter">0/500</div>
+                    </div>
+
+                    <!-- Success Feedback -->
+                    <div class="success-feedback" id="profileSuccessFeedback">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Profile updated successfully!</span>
+                    </div>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="social-media-section">
+                    <h3 class="social-section-title">Social Media Links</h3>
+                    <p class="social-section-subtitle">Share your social media profiles</p>
+
+                    <div class="social-media-list">
+                        <!-- TikTok -->
+                        <div class="social-media-item">
+                            <div class="social-icon tiktok-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">TikTok</div>
+                                <div class="social-description">Share your TikTok profile</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="tiktokToggle" class="toggle-switch">
+                                <label for="tiktokToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- Facebook -->
+                        <div class="social-media-item">
+                            <div class="social-icon facebook-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">Facebook</div>
+                                <div class="social-description">Share your Facebook profile/page</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="facebookToggle" class="toggle-switch">
+                                <label for="facebookToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="social-media-item">
+                            <div class="social-icon instagram-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">Instagram</div>
+                                <div class="social-description">Share your Instagram profile</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="instagramToggle" class="toggle-switch">
+                                <label for="instagramToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- Telegram -->
+                        <div class="social-media-item">
+                            <div class="social-icon telegram-icon">
+                                <i class="fab fa-telegram-plane"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">Telegram</div>
+                                <div class="social-description">Share your Telegram profile/channel</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="telegramToggle" class="toggle-switch">
+                                <label for="telegramToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="social-media-item">
+                            <div class="social-icon whatsapp-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">WhatsApp</div>
+                                <div class="social-description">Share your WhatsApp contact</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="whatsappToggle" class="toggle-switch">
+                                <label for=" whatsappToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- Twitter/X -->
+                        <div class="social-media-item">
+                            <div class="social-icon twitter-icon">
+                                <i class="fab fa-x-twitter"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">X (Twitter)</div>
+                                <div class="social-description">Share your X profile</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="twitterToggle" class="toggle-switch">
+                                <label for="twitterToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- LinkedIn -->
+                        <div class="social-media-item">
+                            <div class="social-icon linkedin-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">LinkedIn</div>
+                                <div class="social-description">Share your LinkedIn profile</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="linkedinToggle" class="toggle-switch">
+                                <label for="linkedinToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- Discord -->
+                        <div class="social-media-item">
+                            <div class="social-icon discord-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">Discord</div>
+                                <div class="social-description">Share your Discord profile</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="discordToggle" class="toggle-switch">
+                                <label for="discordToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+
+                        <!-- YouTube -->
+                        <div class="social-media-item">
+                            <div class="social-icon youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="social-info">
+                                <div class="social-name">YouTube</div>
+                                <div class="social-description">Share your YouTube channel</div>
+                            </div>
+                            <div class="social-toggle">
+                                <input type="checkbox" id="youtubeToggle" class="toggle-switch">
+                                <label for="youtubeToggle" class="toggle-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Task Submission Modal -->
+    <div id="taskSubmissionModal" class="modal-overlay">
+        <div class="modal-container task-submission-container">
+            <div class="modal-header">
+                <h3 id="taskModalTitle">Submit Task</h3>
+                <button class="modal-close" onclick="hideTaskModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="taskModalContent">
+                    <!-- Task details will be loaded here -->
+                </div>
+
+                <div class="submission-form" id="submissionForm">
+                    <div class="form-group">
+                        <label for="submissionDescription">Description (Optional)</label>
+                        <textarea id="submissionDescription" class="form-input" rows="3" placeholder="Describe your submission..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="submissionLinks">Submission Links</label>
+                        <div class="links-container">
+                            <input type="url" id="submissionLink1" class="form-input" placeholder="https://example.com/your-content" required>
+                            <button type="button" id="addLinkBtn" class="add-link-btn">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="additionalLinks"></div>
+                    </div>
+
+                    <div class="platform-selection">
+                        <label>Select Platform</label>
+                        <div class="platform-options" id="platformOptions">
+                            <!-- Platform options will be populated based on task -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="submitTaskBtn" class="modal-btn confirm-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Task
+                </button>
+                <button class="modal-btn cancel-btn" onclick="hideTaskModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Compose Modal -->
+    <div id="chatComposeModal" class="modal-overlay">
+        <div class="modal-container chat-compose-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> New Message</h3>
+                <button class="modal-close" onclick="hideChatComposeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="compose-form">
+                    <div class="form-group">
+                        <label for="composeSubject">Subject</label>
+                        <input type="text" id="composeSubject" class="form-input" placeholder="Enter message subject...">
+                    </div>
+                    <div class="form-group">
+                        <label for="composeMessage">Message</label>
+                        <textarea id="composeMessage" class="form-input" rows="4" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="composeImage">Attach Image (Optional)</label>
+                        <input type="file" id="composeImage" accept="image/*" class="form-input">
+                        <div id="composeImagePreview" class="image-preview" style="display: none;">
+                            <img id="composePreviewImg" src="" alt="Preview">
+                            <button type="button" onclick="removeComposeImage()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="sendComposeBtn" class="modal-btn confirm-btn" onclick="sendComposeMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Message
+                </button>
+                <button class="modal-btn cancel-btn" onclick="hideChatComposeModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Note Modal -->
+    <div id="addNoteModal" class="modal-overlay">
+        <div class="modal-container add-note-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-sticky-note"></i> Add Note</h3>
+                <button class="modal-close" onclick="hideAddNoteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="note-form">
+                    <div class="form-group">
+                        <label for="noteTitle">Note Title</label>
+                        <input type="text" id="noteTitle" class="form-input" placeholder="Enter note title...">
+                    </div>
+                    <div class="form-group">
+                        <label for="noteContent">Note Content</label>
+                        <textarea id="noteContent" class="form-input" rows="6" placeholder="Write your note here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="notePriority">Priority</label>
+                        <select id="notePriority" class="form-input">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="saveNoteBtn" class="modal-btn confirm-btn" onclick="saveNote()">
+                    <i class="fas fa-save"></i>
+                    Save Note
+                </button>
+                <button class="modal-btn cancel-btn" onclick="hideAddNoteModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Slide-Out Drawers -->
+    <!-- Notification Drawer -->
+    <div id="notificationDrawer" class="drawer-overlay">
+        <div class="slide-drawer">
+            <div class="drawer-header">
+                <div class="drawer-header-content">
+                    <h3 class="drawer-title">
+                        <i class="fas fa-bell"></i>
+                        Notifications
+                    </h3>
+                    <button class="drawer-close-btn" onclick="closeNotificationDrawer()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="drawer-content" id="notificationDrawerContent">
+                <div class="notification-empty-drawer">
+                    <i class="fas fa-bell-slash"></i>
+                    <p>No notifications yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- More Menu Drawer -->
+    <div id="moreMenuDrawer" class="drawer-overlay">
+        <div class="slide-drawer">
+            <div class="drawer-header">
+                <div class="drawer-header-content">
+                    <h3 class="drawer-title">
+                        <i class="fas fa-bars"></i>
+                        Menu
+                    </h3>
+                    <button class="drawer-close-btn" onclick="closeMoreMenuDrawer()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="drawer-content">
+                <div class="drawer-menu-item" id="profileDrawerItem">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </div>
+
+                <div class="drawer-menu-item" id="historyDrawerItem">
+                    <i class="fas fa-history"></i>
+                    <span>Task History</span>
+                </div>
+                <div class="drawer-menu-item" onclick="hideProfileModal(); showWithdrawHistoryPage();">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Withdrawals</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                <div class="drawer-menu-item" onclick="closeMoreMenuDrawer(); showWithdrawalHistoryDetailsPage();">
+                            <i class="fas fa-history"></i>
+                            <span>Withdrawal History</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                <div class="drawer-menu-item" id="helpDrawerItem">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </div>
+                <div class="drawer-menu-item" id="privacyDrawerItem">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Privacy</span>
+                </div>
+                <div class="drawer-menu-item logout-item" id="logoutDrawerItem">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Chat Modal -->
+    <div id="adminChatModal" class="modal-overlay admin-chat-overlay">
+        <div class="admin-chat-container">
+            <div class="admin-chat-header">
+                <div class="admin-chat-header-content">
+                    <div class="admin-chat-info">
+                        <div class="admin-avatar">
+                            <div class="admin-logo">
+                                <span class="logo-text">Real <span class="logo-accent">Tasker</span></span>
+                            </div>
+                            <div class="admin-status-indicator"></div>
+                        </div>
+                        <div class="admin-details">
+                            <h3>Admin Support</h3>
+                            <span class="admin-status-text">
+                                <i class="fas fa-circle"></i>
+                                Always Online
+                            </span>
+                        </div>
+                    </div>
+                    <div class="admin-chat-actions">
+                        <button class="admin-action-btn" onclick="loadAdminMessages()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="admin-chat-close" onclick="closeAdminChat()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-chat-body">
+                <div class="admin-chat-messages" id="adminChatMessages">
+                    <div class="admin-chat-welcome">
+                        <div class="admin-welcome-logo">
+                            <span class="logo-text">Real <span class="logo-accent">Tasker</span></span>
+                        </div>
+                        <div class="admin-welcome-message">
+                            <h4>Welcome to Admin Support!</h4>
+                            <p>সরাসরি এডমিনের সাথে যোগাযোগ করুন। আপনার যেকোনো সমস্যার দ্রুত সমাধান পেতে মেসেজ করুন।</p>
+                        </div>
+                    </div>
+                    <div class="admin-messages-container" id="adminMessagesContainer">
+                        <!-- Real-time messages will load here -->
+                    </div>
+                </div>
+
+                <div class="admin-typing-indicator" id="adminTyping" style="display: none;">
+                    <div class="admin-typing-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="typing-text">Admin is typing...</span>
+                </div>
+            </div>
+
+            <div class="admin-chat-footer">
+                <div class="admin-chat-input-container">
+                    <div class="admin-chat-input-wrapper">
+                        <button class="admin-attachment-btn" onclick="selectAdminImage()">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <input type="file" id="adminChatImageInput" accept="image/*" style="display: none;">
+                        <div class="admin-chat-input-box">
+                            <textarea id="adminChatInput" placeholder="এডমিনকে মেসেজ করুন..." rows="1"></textarea>
+                        </div>
+                        <button class="admin-send-btn" onclick="sendAdminMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="admin-chat-status">
+                    <span class="status-indicator">
+                        <i class="fas fa-circle"></i>
+                        Real-time connection active
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Modal -->
+    <div id="liveChatModal" class="modal-overlay live-chat-overlay">
+        <div class="live-chat-container">
+            <div class="live-chat-header">
+                <div class="live-chat-header-content">
+                    <div class="live-chat-team-info">
+                        <div class="live-team-avatar">
+                            <span class="team-initial">RT</span>
+                            <div class="live-status-indicator"></div>
+                        </div>
+                        <div class="live-team-details">
+                            <h3>Real Tasker Support</h3>
+                            <span class="live-status-text">
+                                <i class="fas fa-circle"></i>
+                                Live Now
+                            </span>
+                        </div>
+                    </div>
+                    <button class="live-chat-close" onclick="closeLiveChat()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="live-chat-body">
+                <div class="live-chat-messages" id="liveChatMessages">
+                    <div class="live-chat-welcome">
+                        <div class="welcome-avatar">
+                            <span class="team-initial">RT</span>
+                        </div>
+                        <div class="welcome-message">
+                            <h4>Welcome to Live Support!</h4>
+                            <p>আমরা আপনাকে সাহায্য করতে এখানে আছি। কোন প্রশ্ন থাকলে জিজ্ঞাসা করুন।</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-chat-typing" id="liveChatTyping" style="display: none;">
+                    <div class="typing-avatar">
+                        <span class="team-initial">RT</span>
+                    </div>
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-chat-footer">
+                <div class="live-chat-input-container">
+                    <div class="live-chat-input-wrapper">
+                        <button class="live-attachment-btn" onclick="selectLiveImage()">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <input type="file" id="liveChatImageInput" accept="image/*" style="display: none;">
+                        <div class="live-chat-input-box">
+                            <textarea id="liveChatInput" placeholder="Type your message..." rows="1"></textarea>
+                        </div>
+                        <button class="live-send-btn" onclick="sendLiveMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="live-chat-features">
+                    <button class="feature-btn" onclick="requestScreenShare()">
+                        <i class="fas fa-desktop"></i>
+                        Screen Share
+                    </button>
+                    <button class="feature-btn" onclick="requestVideoCall()">
+                        <i class="fas fa-video"></i>
+                        Video Call
+                    </button>
+                    <button class="feature-btn" onclick="sendQuickReply('Need Help')">
+                        <i class="fas fa-question-circle"></i>
+                        Quick Help
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Page -->
+        <div id="liveChatPage" class="page">
+            <div class="live-chat-page-container">
+                <div class="live-chat-page-header">
+                    <div class="live-chat-header-content">
+                        <div class="live-chat-header-left">
+                            <button class="live-chat-back-btn" onclick="showPage('chatPage')">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div class="chat-user-profile" id="currentChatUserProfile">
+                                <div class="chat-user-avatar">
+                                    <img id="currentChatUserImage" src="" alt="User">
+                                </div>
+                                <div class="chat-user-info">
+                                    <h3 id="currentChatUserName">User Name</h3>
+                                    <span class="chat-user-status">অনলাইন</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="live-chat-header-actions">
+                            <button class="live-chat-action-btn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                            <button class="live-chat-action-btn">
+                                <i class="fas fa-video"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-chat-messages-area">
+                    <div class="live-chat-messages-container">
+                        <div id="individualChatMessagesContainer" class="live-chat-messages">
+                            <!-- Individual chat messages will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-chat-footer">
+                    <div class="live-chat-input-container">
+                        <div class="live-chat-input-wrapper">
+                            <button class="live-attachment-btn" onclick="attachIndividualChatFile()">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <textarea 
+                                id="individualChatMessageInput" 
+                                placeholder="আপনার বার্তা লিখুন..."
+                                onkeydown="handleIndividualChatKeydown(event)"
+                                oninput="adjustIndividualChatTextarea(this)">
+                            </textarea>
+                            <button class="live-send-btn" onclick="sendIndividualChatMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Navigation Bar for Live Chat Page -->
+                <nav class="bottom-navigation">
+                    <div class="nav-container">
+                        <button class="nav-button" data-tab="home" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </button>
+                        <button class="nav-button" data-tab="post">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="nav-label">Post</span>
+                        </button>
+                        <button class="nav-button active" data-tab="chat">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="nav-label">Chat</span>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button class="nav-button" data-tab="leaderboard">
+                            <i class="fas fa-trophy"></i>
+                            <span class="nav-label">Leaderboard</span>
+                        </button>
+                        <button class="nav-button" data-tab="profile" onclick="showProfileMenu()">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Leaderboard Page -->
+        <div id="leaderboardPage" class="page">
+            <div class="leaderboard-page-container">
+                <!-- Leaderboard Header -->
+                <header class="marketplace-header">
+                    <div class="marketplace-header-content">
+                        <div class="marketplace-header-left">
+                            <div class="marketplace-user-profile">
+                                <div class="marketplace-user-avatar" id="leaderboardUserAvatar">
+                                    <img id="leaderboardUserImage" src="" alt="Profile" style="display: none;">
+                                    <div class="marketplace-user-placeholder" id="leaderboardUserPlaceholder">
+                                        E
+                                    </div>
+                                </div>
+                                <div class="marketplace-user-info">
+                                    <h1 class="marketplace-title">Leaderboard</h1>
+                                    <div class="marketplace-user-name" id="leaderboardUserName">Eyasin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marketplace-header-actions">
+                            <button class="marketplace-refresh-btn" onclick="loadLeaderboard()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="marketplace-refresh-btn" onclick="scrollToTopLeaderboard()" title="Scroll to Top">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+
+
+                <!-- Date Display -->
+                <div class="leaderboard-date-section">
+                    <div class="date-info">
+                        <span class="date-label">Date</span>
+                        <span class="date-value" id="leaderboardDate">8/16/2025</span>
+                    </div>
+                    <i class="fas fa-calendar-alt date-icon"></i>
+                </div>
+
+
+
+                <!-- Top 3 Winners Podium -->
+                <div class="podium-section">
+                    <div class="podium-container">
+                        <!-- 2nd Place -->
+                        <div class="podium-position position-2" id="position2">
+                            <div class="podium-user">
+                                <div class="podium-avatar">
+                                    <img src="" alt="2nd Place" class="podium-image" style="display: none;">
+                                    <div class="podium-placeholder">
+                                        A
+                                    </div>
+                                    <div class="position-badge">
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                                <h3 class="podium-name">admin</h3>
+                                <div class="podium-amount">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span class="amount-value">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 1st Place -->
+                        <div class="podium-position position-1" id="position1">
+                            <div class="podium-user">
+                                <div class="podium-avatar">
+                                    <img src="" alt="1st Place" class="podium-image" style="display: none;">
+                                    <div class="podium-placeholder">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="position-badge">
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                                <h3 class="podium-name">c3446305</h3>
+                                <div class="podium-amount">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span class="amount-value">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3rd Place -->
+                        <div class="podium-position position-3" id="position3">
+                            <div class="podium-user">
+                                <div class="podium-avatar">
+                                    <img src="" alt="3rd Place" class="podium-image" style="display: none;">
+                                    <div class="podium-placeholder">
+                                        E
+                                    </div>
+                                    <div class="position-badge">
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                                <h3 class="podium-name">Eyasin</h3>
+                                <div class="podium-amount">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span class="amount-value">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ranking Table -->
+                <div class="ranking-section">
+                    <div class="ranking-header">
+                        <div class="ranking-title">
+                            <span class="rank-column">Rank</span>
+                            <span class="name-column">Name</span>
+                            <span class="amount-column">Amount</span>
+                        </div>
+                    </div>
+
+                    <div class="ranking-list" id="rankingList">
+                        <div class="ranking-item">
+                            <div class="rank-number">4</div>
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <div class="user-placeholder">R</div>
+                                </div>
+                                <div class="user-details">
+                                    <h4 class="user-name">Ridwan Kabir Beacon</h4>
+                                    <p class="user-subtitle">Real Tasker Member</p>
+                                </div>
+                            </div>
+                            <div class="user-earnings">
+                                <div class="earnings-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <span>2,500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Bar -->
+                <nav class="bottom-navigation" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; background: white; border-top: 1px solid #e0e0e0; padding: 10px 0;">
+                    <div class="nav-container">
+                        <button class="nav-button" data-tab="home" onclick="showPage('homePage'); updateCurrentPageTitle('Home'); loadTasks();">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </button>
+                        <button class="nav-button" data-tab="post" onclick="showPage('marketplacePage'); updateCurrentPageTitle('Marketplace'); loadMarketplaceProducts();">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="nav-label">Post</span>
+                        </button>
+                        <button class="nav-button" data-tab="chat" onclick="showChatInterface();">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="nav-label">Chat</span>
+                            <span class="notification-dot"></span>
+                        </button>
+                        <button class="nav-button active" data-tab="leaderboard">
+                            <i class="fas fa-trophy"></i>
+                            <span class="nav-label">Leaderboard</span>
+                        </button>
+                        <button class="nav-button" data-tab="profile" onclick="showProfileMenu();">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
